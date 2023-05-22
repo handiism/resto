@@ -69,19 +69,22 @@ class _HomeState extends State<Home> {
           title: Text(_filtered ? "Restoran Favorit" : "Restoran"),
           actions: [
             IconButton(
-                onPressed: () {
-                  setState(() {
-                    _filtered = !_filtered;
-                  });
-                },
-                icon: Icon(_filtered ? Icons.filter_alt : Icons.filter_alt_off))
+              onPressed: () {
+                setState(() {
+                  _filtered = !_filtered;
+                });
+              },
+              icon: Icon(
+                _filtered ? Icons.filter_alt : Icons.filter_alt_off,
+              ),
+            )
           ]),
       body: FutureBuilder(
         future: _getData(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.hasData) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.connectionState == ConnectionState.done) {
+          } else {
             return ListView.builder(
               itemCount: restaurants.length,
               itemBuilder: (context, index) {
@@ -188,17 +191,17 @@ class _HomeState extends State<Home> {
             );
           }
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Center(
-                child: Icon(
-                  Icons.signal_cellular_connected_no_internet_0_bar,
-                ),
-              ),
-              Center(child: Text("Tidak Ada Koneksi Internet"))
-            ],
-          );
+          // return const Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Center(
+          //       child: Icon(
+          //         Icons.signal_cellular_connected_no_internet_0_bar,
+          //       ),
+          //     ),
+          //     Center(child: Text("Tidak Ada Koneksi Internet"))
+          //   ],
+          // );
         },
       ),
     );
