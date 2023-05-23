@@ -15,19 +15,26 @@ class Time extends StatefulWidget {
 class _TimeState extends State<Time> {
   Location location = tz.UTC;
   DateTime datetime = DateTime.now();
+  late Timer timer;
 
   @override
   void initState() {
     super.initState();
     tz.initializeTimeZones();
 
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         tz.initializeTimeZones();
 
         datetime = tz.TZDateTime.now(location);
       });
     });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override

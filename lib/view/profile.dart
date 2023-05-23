@@ -41,6 +41,8 @@ class _ProfileState extends State<Profile> {
         controller.text = user.message.toString();
         logger.d(user);
       });
+      controller.text = user.message.toString();
+      logger.d(user);
     } catch (e) {
       logger.d(e);
       logger.d('error');
