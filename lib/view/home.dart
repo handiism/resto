@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:resto/model/resraurant.dart';
+import 'package:resto/model/restaurant.dart';
 import 'package:resto/utils/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
